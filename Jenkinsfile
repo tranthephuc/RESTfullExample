@@ -32,8 +32,14 @@ pipeline {
     stages {
         stage('Init') {
             steps {
-                echo 'Initing...'
-                sayHello 'Phuc Tran The'
+                //echo 'Initing...'
+                //sayHello 'Phuc Tran The'
+                 // global initialization tasks
+                
+                echo 'Check out latest helix-deploy-scripts...'
+                dir("${PROJECT_DEPLOY_SCRIPT_DIRECTORY}") {
+                    git branch: 'master', credentialsId: '', url: 'https://github.com/tranthephuc/RESTfullExample.git'
+                }
             }
         }
         stage('Build') {
