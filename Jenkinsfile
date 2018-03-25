@@ -40,6 +40,12 @@ pipeline {
                 dir("${PROJECT_DEPLOY_SCRIPT_DIRECTORY}") {
                     git branch: 'master', credentialsId: '', url: 'https://github.com/tranthephuc/HelloGithub.git'
                 }
+                
+                script {
+                    def buildUtilities = new BuildUtilities()
+                    
+                    buildUtilities.createMetadata(this)
+                }
             }
         }
         stage('Build') {
