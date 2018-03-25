@@ -37,6 +37,7 @@ pipeline {
                  // global initialization tasks
                 
                 echo 'Check out latest helix-deploy-scripts...'
+                echo "${WORKSPACE}"
                 dir("${PROJECT_DEPLOY_SCRIPT_DIRECTORY}") {
                     git branch: 'master', credentialsId: '', url: 'https://github.com/tranthephuc/RESTfullExample.git'
                 }
