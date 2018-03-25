@@ -30,6 +30,7 @@ pipeline {
         stage('Deploy (Dev)') {
             steps {
                 echo 'Deploying...'
+                sayGoodbye 'Phuc Tran The'
             }
         }
     }
