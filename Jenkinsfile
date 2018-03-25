@@ -3,7 +3,31 @@
 @Library('jenkins-global-libraries') _
 
 pipeline {
-    agent any
+    //agent any
+    agent {
+        label {
+            label ""
+            customWorkspace "/var/jenkins_home/workspace/wsi-sun_master"
+        }
+    }
+    tools {
+        maven 'apache-maven-3.5.0'
+    }
+    environment {
+        WORKSPACE = pwd()
+
+        PROJECT_DEPLOY_SCRIPT_DIRECTORY = "helix-deploy-scripts"
+        PROJECT_DEPLOY_BASEDIR = "temp"
+        
+        // controls pipeline graph indicators and more importantly flow on failure
+        // setting "true" puts currentBuild state into "UNSTABLE" if failure occurs on test, and pipeline continues processing
+        // otherwise puts currentBuild state into "FAILURE" if failure occurs on test, and pipeline continuation halts
+        SUPPRESS_TEST_FAILURES = "true"
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '25'))
+	    disableConcurrentBuilds()
+    }
 
     stages {
         stage('Init') {
